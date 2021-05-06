@@ -881,8 +881,8 @@ void HelloTriangle::render_triangle(Context &context, uint32_t swapchain_index)
 	vkCmdBindPipeline(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, context.pipeline);
 
 	VkViewport vp{};
-	vp.width    = static_cast<float>(context.swapchain_dimensions.width);
-	vp.height   = static_cast<float>(context.swapchain_dimensions.height);
+	vp.width    = static_cast<float>(context.swapchain_dimensions.width/2);
+	vp.height   = static_cast<float>(context.swapchain_dimensions.height/2);
 	vp.minDepth = 0.0f;
 	vp.maxDepth = 1.0f;
 	// Set viewport dynamically
@@ -895,7 +895,8 @@ void HelloTriangle::render_triangle(Context &context, uint32_t swapchain_index)
 	vkCmdSetScissor(cmd, 0, 1, &scissor);
 
 	// Draw three vertices with one instance.
-	vkCmdDraw(cmd, 3, 1, 0, 0);
+	vkCmdDraw(cmd, 6, 2, 0, 0);
+
 
 	// Complete render pass.
 	vkCmdEndRenderPass(cmd);
